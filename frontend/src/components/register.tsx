@@ -6,7 +6,7 @@ import Header from "./Header"
 import styles from "./Register.module.css"
 
 interface RegisterProps {
-  onRegister: (credentials: { email: string; password: string; role: string }) => boolean
+  onRegister: (credentials: { email: string; password: string; role: string; firstName: string; lastName: string }) => boolean
 }
 
 const Register = ({ onRegister }: RegisterProps) => {
@@ -14,6 +14,8 @@ const Register = ({ onRegister }: RegisterProps) => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [role, setRole] = useState("student")
+  const [firstName, setFirstName] = useState("") // State for first name
+  const [lastName, setLastName] = useState("") // State for last name
   const [error, setError] = useState("")
   const navigate = useNavigate() // Hook to navigate after registration
 
@@ -21,7 +23,7 @@ const Register = ({ onRegister }: RegisterProps) => {
     e.preventDefault()
     setError("")
 
-    if (!email || !password || !confirmPassword) {
+    if (!email || !password || !confirmPassword || !firstName || !lastName) {
       setError("Please fill in all fields")
       return
     }
@@ -31,7 +33,7 @@ const Register = ({ onRegister }: RegisterProps) => {
       return
     }
 
-    const success = onRegister({ email, password, role })
+    const success = onRegister({ email, password, role, firstName, lastName })
     if (!success) {
       setError("Registration failed. Try again.")
       return
@@ -56,6 +58,30 @@ const Register = ({ onRegister }: RegisterProps) => {
           {error && <div className={styles.errorMessage}>{error}</div>}
 
           <form onSubmit={handleSubmit} className={styles.registerForm}>
+            <div className={styles.formGroup}>
+              <label htmlFor="firstName">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Enter your first name"
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Enter your last name"
+                required
+              />
+            </div>
+
             <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <input

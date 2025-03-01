@@ -7,7 +7,7 @@ interface DashboardProps {
   onLogout: () => void
 }
 
-const Dashboard = ({ onLogout }: DashboardProps) => {
+const TeacherDashboard = ({ onLogout }: DashboardProps) => {
   return (
     <div>
       <Header isAuthenticated onLogout={onLogout} />
@@ -27,12 +27,12 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
             <p className={styles.statValue}>12</p>
           </div>
           <div className={styles.statCard}>
-            <h3>Average Grade</h3>
-            <p className={styles.statValue}>87%</p>
-          </div>
-          <div className={styles.statCard}>
             <h3>Upcoming Deadlines</h3>
             <p className={styles.statValue}>5</p>
+          </div>
+          <div className={styles.statCard}>
+            <h3>Students</h3>
+            <p className={styles.statValue}>200</p>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
                   </div>
                   <p className={styles.progressText}>{course.progress}% Complete</p>
                   <Link to={`/modules/${course.id}`} className={styles.continueButton}>
-                    Continue Learning
+                    Manage Course
                   </Link>
                 </div>
               </div>
@@ -71,20 +71,19 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
             <h2>Recent Activity</h2>
             <div className={styles.activityList}>
               <div className={styles.activityItem}>
-                <div className={styles.activityIcon}>📝</div>
+                <div className={styles.activityIcon}>📄</div>
                 <div className={styles.activityContent}>
                   <p>
-                    You submitted <strong>Assignment 3</strong> in <strong>Introduction to Programming</strong>
+                    You graded <strong>Assignment 2</strong> for <strong>Introduction to Programming</strong>
                   </p>
                   <span className={styles.activityTime}>2 hours ago</span>
                 </div>
               </div>
               <div className={styles.activityItem}>
-                <div className={styles.activityIcon}>🏆</div>
+                <div className={styles.activityIcon}>📝</div>
                 <div className={styles.activityContent}>
                   <p>
-                    You received a grade of <strong>92%</strong> on <strong>Quiz 2</strong> in{" "}
-                    <strong>Data Structures</strong>
+                    You created a new assignment for <strong>Data Structures</strong>
                   </p>
                   <span className={styles.activityTime}>Yesterday</span>
                 </div>
@@ -93,7 +92,7 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
                 <div className={styles.activityIcon}>📚</div>
                 <div className={styles.activityContent}>
                   <p>
-                    You completed <strong>Module 4</strong> in <strong>Web Development Fundamentals</strong>
+                    You updated the syllabus for <strong>Web Development Fundamentals</strong>
                   </p>
                   <span className={styles.activityTime}>2 days ago</span>
                 </div>
@@ -110,7 +109,7 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
                   <span className={styles.month}>Jun</span>
                 </div>
                 <div className={styles.deadlineContent}>
-                  <h4>Final Project Submission</h4>
+                  <h4>Grade Final Project</h4>
                   <p>Web Development Fundamentals</p>
                 </div>
               </div>
@@ -120,7 +119,7 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
                   <span className={styles.month}>Jun</span>
                 </div>
                 <div className={styles.deadlineContent}>
-                  <h4>Quiz 3</h4>
+                  <h4>Grade Quiz 3</h4>
                   <p>Data Structures</p>
                 </div>
               </div>
@@ -130,7 +129,7 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
                   <span className={styles.month}>Jun</span>
                 </div>
                 <div className={styles.deadlineContent}>
-                  <h4>Group Discussion</h4>
+                  <h4>Grade Group Discussions</h4>
                   <p>Introduction to Programming</p>
                 </div>
               </div>
@@ -142,5 +141,4 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
   )
 }
 
-export default Dashboard
-
+export default TeacherDashboard

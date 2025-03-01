@@ -21,6 +21,10 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
     }
   }
 
+  // Get the user's role from localStorage
+  const userRole = JSON.parse(localStorage.getItem("lms-user") || "{}")?.role || "student"
+
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -31,7 +35,8 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
       <nav className={styles.nav}>
         {isAuthenticated ? (
           <>
-            <Link to="/dashboard" className={styles.navLink}>
+            {/* Dynamically generate the dashboard link based on the user role */}
+            <Link to={userRole ? `/${userRole}-dashboard` : "/"} className={styles.navLink}>
               Dashboard
             </Link>
             <Link to="/timeline" className={styles.navLink}>
@@ -78,4 +83,3 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
 }
 
 export default Header
-

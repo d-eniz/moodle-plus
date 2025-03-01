@@ -25,7 +25,7 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <Link to="/">
-          <h1>EduLearn</h1>
+          <img src="/moodleplus.png" alt="Moodle+" width="175" height="40"/>
         </Link>
       </div>
       <nav className={styles.nav}>

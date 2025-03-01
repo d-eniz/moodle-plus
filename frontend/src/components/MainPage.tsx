@@ -10,7 +10,7 @@ const MainPage = () => {
         <section className={styles.hero}>
           <div className="container">
             <div className={styles.heroContent}>
-              <h1>Welcome to EduLearn</h1>
+              <h1>Welcome to Moodle+</h1>
               <p>The modern learning management system designed for students and educators</p>
               <div className={styles.heroCta}>
                 <Link to="/login" className="btn btn-primary">
@@ -55,7 +55,7 @@ const MainPage = () => {
             <div className="grid grid-cols-1 grid-cols-2">
               <div className="card">
                 <p>
-                  "EduLearn has transformed how I approach my studies. The intuitive interface and comprehensive
+                  "Moodle+ has transformed how I approach my studies. The intuitive interface and comprehensive
                   features make learning enjoyable."
                 </p>
                 <div className={styles.testimonialAuthor}>
@@ -65,7 +65,7 @@ const MainPage = () => {
               </div>
               <div className="card">
                 <p>
-                  "As an educator, EduLearn provides me with all the tools I need to create engaging content and track
+                  "As an educator, Moodle+ provides me with all the tools I need to create engaging content and track
                   student progress effectively."
                 </p>
                 <div className={styles.testimonialAuthor}>
@@ -80,7 +80,7 @@ const MainPage = () => {
         <section className={styles.cta}>
           <div className="container">
             <h2>Ready to Transform Your Learning Experience?</h2>
-            <p>Join thousands of students and educators who are already using EduLearn.</p>
+            <p>Join thousands of students and educators who are already using Moodle+.</p>
             <Link to="/login" className="btn btn-primary">
               Get Started Today
             </Link>
@@ -89,7 +89,7 @@ const MainPage = () => {
       </main>
       <footer className={styles.footer}>
         <div className="container">
-          <p>&copy; {new Date().getFullYear()} EduLearn. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Moodle+. Some rights reserved.</p>
         </div>
       </footer>
     </div>
@@ -97,4 +97,3 @@ const MainPage = () => {
 }
 
 export default MainPage
-

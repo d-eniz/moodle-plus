@@ -1,0 +1,105 @@
+.registerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 70px);
+    padding: 2rem;
+  }
+  
+  .registerCard {
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .registerCard h2 {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+  
+  .registerCard p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+  
+  .registerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .formGroup label {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  
+  .formGroup input {
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.2s ease;
+  }
+  
+  .formGroup input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+  }
+  
+  .radioGroup {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .radioGroup label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .registerButton {
+    padding: 0.75rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .registerButton:hover {
+    background-color: var(--accent-hover);
+  }
+  
+  .loginPrompt {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: var(--text-secondary);
+  }
+  
+  .loginPrompt a {
+    color: var(--accent-color);
+    font-weight: 500;
+  }
+  
+  .errorMessage {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  

@@ -1,16 +1,28 @@
 import { useState, useEffect } from "react"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom"
 import { ThemeProvider } from "./contexts/ThemeContext"
+import Header from "./components/Header" // Import your Header component
 import MainPage from "./components/MainPage"
 import Login from "./components/Login"
-import Register from "./components/Register"  // Import the Register component
+import Register from "./components/register"
 import Dashboard from "./components/student-dashboard"
-import TeacherDashboard from "./components/teacher-dashboard" // Import the TeacherDashboard component
+import TeacherDashboard from "./components/teacher-dashboard"
 import ModulePage from "./components/ModulePage"
 import Grades from "./components/Grades"
 import Timeline from "./components/Timeline"
 import ProtectedRoute from "./components/ProtectedRoute"
 import "./App.css"
+
+const Layout = () => {
+  return (
+    <div className="app-container">
+      <Header />
+      <main className="main-content">
+        <Outlet /> {/* This is where your page content will be rendered */}
+      </main>
+    </div>
+  )
+}
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -59,64 +71,66 @@ function App() {
     <ThemeProvider>
       <Router>
         <Routes>
-          <Route path="/" element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <MainPage />} />
-          <Route
-            path="/login"
-            element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <Login onLogin={handleLogin} />}
-          />
-          <Route
-            path="/register"
-            element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <Register onRegister={handleRegister} />}
-          />
-          {/* Redirect based on user role or to main page if undefined */}
-          <Route
-            path="/student-dashboard"
-            element={
-              userRole === "student" ? (
+          <Route element={<Layout />}>
+            <Route path="/" element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <MainPage />} />
+            <Route
+              path="/login"
+              element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <Login onLogin={handleLogin} />}
+            />
+            <Route
+              path="/register"
+              element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <Register onRegister={handleRegister} />}
+            />
+            {/* Redirect based on user role or to main page if undefined */}
+            <Route
+              path="/student-dashboard"
+              element={
+                userRole === "student" ? (
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Dashboard onLogout={handleLogout} />
+                  </ProtectedRoute>
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/teacher-dashboard"
+              element={
+                userRole === "teacher" ? (
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <TeacherDashboard onLogout={handleLogout} />
+                  </ProtectedRoute>
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/modules/:moduleId"
+              element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Dashboard onLogout={handleLogout} />
+                  <ModulePage onLogout={handleLogout} />
                 </ProtectedRoute>
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
-          <Route
-            path="/teacher-dashboard"
-            element={
-              userRole === "teacher" ? (
+              }
+            />
+            <Route
+              path="/grades"
+              element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <TeacherDashboard onLogout={handleLogout} />
+                  <Grades onLogout={handleLogout} />
                 </ProtectedRoute>
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
-          <Route
-            path="/modules/:moduleId"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <ModulePage onLogout={handleLogout} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/grades"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Grades onLogout={handleLogout} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/timeline"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Timeline onLogout={handleLogout} />
-              </ProtectedRoute>
-            }
-          />
+              }
+            />
+            <Route
+              path="/timeline"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Timeline onLogout={handleLogout} />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
         </Routes>
       </Router>
     </ThemeProvider>

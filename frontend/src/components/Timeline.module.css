@@ -1,9 +1,12 @@
 .timelineHeader {
   margin-bottom: 2rem;
+  border-bottom: 1px solid #666; /* Added line under the title and subtitle */
+  padding-bottom: 0.5rem;
 }
 
 .timelineHeader h1 {
   font-size: 2rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
@@ -41,13 +44,6 @@
   border-color: var(--accent-color);
 }
 
-.timelineContainer {
-  background-color: var(--bg-secondary);
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: var(--card-shadow);
-}
-
 .timeline {
   display: flex;
   flex-direction: column;
@@ -57,6 +53,9 @@
 .timelineItem {
   display: flex;
   gap: 1.5rem;
+  border: 1px solid var(--border-color); /* Added border instead of drop shadow */
+  border-radius: 8px; /* Rounded corners for event cards */
+  padding: 1rem;
 }
 
 .timelineDate {
@@ -84,7 +83,7 @@
   padding: 1rem;
   background-color: var(--bg-primary);
   border-radius: 8px;
-  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color); /* Harder border around event content */
 }
 
 .eventIcon {
@@ -135,4 +134,3 @@
     min-width: auto;
   }
 }
-

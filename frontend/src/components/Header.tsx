@@ -1,9 +1,22 @@
 "use client"
 
 import { useContext } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { ThemeContext } from "../contexts/ThemeContext"
 import styles from "./Header.module.css"
+import {
+  FiHome,
+  FiInfo,
+  FiStar,
+  FiGrid,
+  FiCalendar,
+  FiTrendingUp,
+  FiSun,
+  FiMoon,
+  FiLogIn,
+  FiLogOut,
+  FiUser
+} from "react-icons/fi"
 
 interface HeaderProps {
   onLogout?: () => void
@@ -14,6 +27,10 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
   const { theme, toggleTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
 
+  const userData = JSON.parse(localStorage.getItem("lms-user") || "{}")
+  const userRole = userData?.role || "student"
+  const { firstName = "John", lastName = "Doe", email = "user@example.com" } = userData
+
   const handleLogout = () => {
     if (onLogout) {
       onLogout()
@@ -21,64 +38,125 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
     }
   }
 
-  // Get the user's role from localStorage
-  const userRole = JSON.parse(localStorage.getItem("lms-user") || "{}")?.role || "student"
-
-
   return (
-    <header className={styles.header}>
-      <div className={styles.logo}>
-        <Link to="/">
-          <img src="/moodleplus.png" alt="Moodle+" width="175" height="40"/>
-        </Link>
-      </div>
-      <nav className={styles.nav}>
-        {isAuthenticated ? (
-          <>
-            {/* Dynamically generate the dashboard link based on the user role */}
-            <Link to={userRole ? `/${userRole}-dashboard` : "/"} className={styles.navLink}>
-              Dashboard
-            </Link>
-            <Link to="/timeline" className={styles.navLink}>
-              Timeline
-            </Link>
-            <Link to="/grades" className={styles.navLink}>
-              Grades
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to="/" className={styles.navLink}>
-              Home
-            </Link>
-            <Link to="/about" className={styles.navLink}>
-              About
-            </Link>
-            <Link to="/features" className={styles.navLink}>
-              Features
-            </Link>
-          </>
-        )}
-      </nav>
-      <div className={styles.actions}>
-        <button
-          onClick={toggleTheme}
-          className={styles.themeToggle}
-          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-        >
-          {theme === "light" ? "🌙" : "☀️"}
-        </button>
-        {isAuthenticated ? (
-          <button onClick={handleLogout} className={styles.authButton}>
-            Logout
-          </button>
-        ) : (
-          <Link to="/login" className={styles.authButton}>
-            Login
+    <aside className={styles.sidebar}>
+      <div className={styles.sidebarContent}>
+        <div className={styles.logoContainer}>
+          <Link to="/">
+            <img
+              src="/moodleplus.png"
+              alt="Moodle+"
+              className={styles.logo}
+            />
           </Link>
-        )}
+        </div>
+
+        <nav className={styles.nav}>
+          {isAuthenticated ? (
+            <>
+              <NavLink
+                to={userRole ? `/${userRole}-dashboard` : "/"}
+                className={({ isActive }) =>
+                  `${styles.navItem} ${isActive ? styles.active : ""}`
+                }
+                end
+              >
+                <FiGrid className={styles.navIcon} />
+                Dashboard
+              </NavLink>
+              <NavLink
+                to="/timeline"
+                className={({ isActive }) =>
+                  `${styles.navItem} ${isActive ? styles.active : ""}`
+                }
+              >
+                <FiCalendar className={styles.navIcon} />
+                Timeline
+              </NavLink>
+              <NavLink
+                to="/grades"
+                className={({ isActive }) =>
+                  `${styles.navItem} ${isActive ? styles.active : ""}`
+                }
+              >
+                <FiTrendingUp className={styles.navIcon} />
+                Grades
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `${styles.navItem} ${isActive ? styles.active : ""}`
+                }
+                end
+              >
+                <FiHome className={styles.navIcon} />
+                Home
+              </NavLink>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `${styles.navItem} ${isActive ? styles.active : ""}`
+                }
+              >
+                <FiInfo className={styles.navIcon} />
+                About
+              </NavLink>
+              <NavLink
+                to="/features"
+                className={({ isActive }) =>
+                  `${styles.navItem} ${isActive ? styles.active : ""}`
+                }
+              >
+                <FiStar className={styles.navIcon} />
+                Features
+              </NavLink>
+            </>
+          )}
+        </nav>
+
+        <div className={styles.sidebarFooter}>
+          {isAuthenticated && (
+            <div className={styles.userInfo}>
+              <div className={styles.userAvatar}>
+                <FiUser className={styles.userIcon} />
+              </div>
+              <div className={styles.userDetails}>
+                <span className={styles.userName}>{firstName} {lastName}</span>
+                <span className={styles.userEmail}>{email}</span>
+              </div>
+            </div>
+          )}
+
+          <div className={styles.footerActions}>
+            <button
+              onClick={toggleTheme}
+              className={styles.themeToggle}
+              aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            >
+              {theme === "light" ? (
+                <FiMoon className={styles.navIcon} />
+              ) : (
+                <FiSun className={styles.navIcon} />
+              )}
+            </button>
+            {isAuthenticated ? (
+              <button onClick={handleLogout} className={styles.authButton}>
+                <FiLogOut className={styles.authIcon} />
+                Logout
+              </button>
+            ) : (
+              <Link to="/login" className={styles.authButton}>
+                <FiLogIn className={styles.authIcon} />
+                Login
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
-    </header>
+    </aside>
   )
 }
 

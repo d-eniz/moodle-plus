@@ -1,53 +1,91 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
   background-color: var(--bg-secondary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  z-index: 1000;
 }
 
-.logo h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--accent-color);
+.sidebarContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.logo a {
-  text-decoration: none;
+.logoContainer {
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  max-width: 180px;
 }
 
 .nav {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
 }
 
-.navLink {
-  text-decoration: none;
-  color: var(--text-primary);
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.navLink:hover {
-  color: var(--accent-color);
-}
-
-.actions {
+.navItem {
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.navItem:hover {
+  background-color: var(--bg-hover);
+  color: var(--accent-color);
+}
+
+.navItem.active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.navIcon {
+  font-size: 1.1rem;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebarFooter {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .themeToggle {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-primary);
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .themeToggle:hover {
@@ -55,14 +93,16 @@
 }
 
 .authButton {
-  padding: 0.5rem 1.2rem;
-  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
   background-color: var(--accent-color);
   color: white;
-  font-weight: 500;
+  text-decoration: none;
   border: none;
   cursor: pointer;
-  text-decoration: none;
   transition: background-color 0.2s ease;
 }
 
@@ -70,21 +110,115 @@
   background-color: var(--accent-hover);
 }
 
+.authIcon {
+  font-size: 1.1rem;
+}
+
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 1rem;
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .sidebarContent {
     padding: 1rem;
   }
 
   .nav {
-    width: 100%;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
   }
 
-  .actions {
-    width: 100%;
-    justify-content: center;
+  .navItem {
+    padding: 0.5rem 1rem;
+  }
+
+  .sidebarFooter {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1rem;
   }
 }
 
+/* Add these new styles */
+.logoContainer {
+  margin-bottom: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav {
+  gap: 0.25rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userIcon {
+  color: white;
+  font-size: 1.25rem;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.userEmail {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.footerActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Modify existing styles */
+.sidebarFooter {
+  gap: 0.5rem;
+  border-top: none;
+  padding-top: 0;
+}
+
+.navItem {
+  padding: 0.6rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .userInfo {
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+  }
+
+  .nav {
+    gap: 0.25rem;
+  }
+}

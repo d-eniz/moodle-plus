@@ -1,71 +1,71 @@
-import { useState, useEffect } from "react"
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom"
-import { ThemeProvider } from "./contexts/ThemeContext"
-import Header from "./components/Header" // Import your Header component
-import MainPage from "./components/MainPage"
-import Login from "./components/Login"
-import Register from "./components/register"
-import Dashboard from "./components/student-dashboard"
-import TeacherDashboard from "./components/teacher-dashboard"
-import ModulePage from "./components/ModulePage"
-import Grades from "./components/Grades"
-import Timeline from "./components/Timeline"
-import ProtectedRoute from "./components/ProtectedRoute"
-import "./App.css"
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import Header from "./components/Header"; // Import your Header component
+import MainPage from "./components/MainPage";
+import Login from "./components/Login";
+import Register from "./components/register";
+import Dashboard from "./components/student-dashboard";
+import TeacherDashboard from "./components/teacher-dashboard";
+import ModulePage from "./components/ModulePage";
+import Grades from "./components/Grades";
+import Timeline from "./components/Timeline";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./App.css";
 
 const Layout = () => {
   return (
     <div className="app-container">
-      <Header />
+      <Header /> {/* Sidebar / Header */}
       <main className="main-content">
         <Outlet /> {/* This is where your page content will be rendered */}
       </main>
     </div>
-  )
-}
+  );
+};
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [userRole, setUserRole] = useState<string | null | undefined>(undefined) // Allow for undefined role
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState<string | null | undefined>(undefined); // Allow for undefined role
 
   // Check if user is already logged in
   useEffect(() => {
-    const user = localStorage.getItem("lms-user")
+    const user = localStorage.getItem("lms-user");
     if (user) {
-      const parsedUser = JSON.parse(user)
-      setIsAuthenticated(true)
-      setUserRole(parsedUser.role)  // Set the user's role from localStorage
+      const parsedUser = JSON.parse(user);
+      setIsAuthenticated(true);
+      setUserRole(parsedUser.role);  // Set the user's role from localStorage
     }
-  }, [])
+  }, []);
 
   const handleLogin = (credentials: { email: string; password: string }) => {
     // In a real app, you would validate credentials against a backend
     if (credentials.email && credentials.password) {
-      const user = { email: credentials.email, role: "student" } // Example, adjust as needed
-      localStorage.setItem("lms-user", JSON.stringify(user))
-      setIsAuthenticated(true)
-      setUserRole(user.role)  // Store the role
-      return true
+      const user = { email: credentials.email, role: "student" }; // Example, adjust as needed
+      localStorage.setItem("lms-user", JSON.stringify(user));
+      setIsAuthenticated(true);
+      setUserRole(user.role);  // Store the role
+      return true;
     }
-    return false
-  }
+    return false;
+  };
 
   const handleLogout = () => {
-    localStorage.removeItem("lms-user")
-    setIsAuthenticated(false)
-    setUserRole(undefined)  // Clear the role
-  }
+    localStorage.removeItem("lms-user");
+    setIsAuthenticated(false);
+    setUserRole(undefined);  // Clear the role
+  };
 
   const handleRegister = (user: { email: string; password: string; role: string }) => {
     // In a real app, you would save the user data to a backend
     if (user.email && user.password && user.role) {
-      localStorage.setItem("lms-user", JSON.stringify(user))
-      setIsAuthenticated(true)
-      setUserRole(user.role)  // Set the role after registration
-      return true
+      localStorage.setItem("lms-user", JSON.stringify(user));
+      setIsAuthenticated(true);
+      setUserRole(user.role);  // Set the role after registration
+      return true;
     }
-    return false
-  }
+    return false;
+  };
 
   return (
     <ThemeProvider>
@@ -134,7 +134,7 @@ function App() {
         </Routes>
       </Router>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -125,9 +125,9 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
               aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
             >
               {theme === "light" ? (
-                <FiMoon className={styles.navIcon} />
+                <FiMoon className={styles.authIcon} />
               ) : (
-                <FiSun className={styles.navIcon} />
+                <FiSun className={styles.authIcon} />
               )}
               Change View
             </button>

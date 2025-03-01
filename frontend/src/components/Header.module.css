@@ -100,7 +100,6 @@
   border-radius: 8px;
   background-color: var(--accent-color);
   color: white;
-  text-decoration: none;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;

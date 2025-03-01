@@ -126,21 +126,48 @@ button {
   }
 }
 
-/* App.css */
+/* App layout container */
 .app-container {
-  display: flex;
-  flex-direction: column;
+  display: flex;  /* Flex container */
   min-height: 100vh;
+  flex-direction: row; /* Sidebar and main content side by side */
 }
 
+/* Main content styles */
 .main-content {
-  flex: 1;
-  padding-top: 80px; /* Adjust this value based on your header height */
+  margin-left: 250px;  /* Add a left margin to create space for the sidebar */
+  padding-top: 80px;  /* Adjust this value based on your header height */
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: var(--bg-primary); /* Example background color for content */
 }
 
 /* For mobile responsiveness */
 @media (max-width: 768px) {
-  .main-content {
-    padding-top: 60px;
+  .app-container {
+    flex-direction: column;  /* Stack header and main content vertically on smaller screens */
   }
+
+  .header {
+    width: 100%; /* Make the header full-width */
+    position: relative; /* Make it normal flow on smaller screens */
+  }
+
+  .main-content {
+    margin-left: 0; /* Remove the left margin on mobile */
+    padding-top: 60px;
+    padding: 0.8rem;
+  }
+}
+
+/* Header / Sidebar styles */
+.header {
+  width: 250px; /* Set the width of your sidebar */
+  background-color: var(--bg-secondary); /* Example background color for sidebar */
+  padding: 20px;
+  position: fixed; /* Fix the sidebar to the left */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000; /* Ensure the sidebar stays on top of other content */
 }

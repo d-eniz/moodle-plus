@@ -118,18 +118,6 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
         </nav>
 
         <div className={styles.sidebarFooter}>
-          {isAuthenticated && (
-            <div className={styles.userInfo}>
-              <div className={styles.userAvatar}>
-                <FiUser className={styles.userIcon} />
-              </div>
-              <div className={styles.userDetails}>
-                <span className={styles.userName}>{firstName} {lastName}</span>
-                <span className={styles.userEmail}>{email}</span>
-              </div>
-            </div>
-          )}
-
           <div className={styles.footerActions}>
             <button
               onClick={toggleTheme}
@@ -141,7 +129,9 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
               ) : (
                 <FiSun className={styles.navIcon} />
               )}
+              Change View
             </button>
+
             {isAuthenticated ? (
               <button onClick={handleLogout} className={styles.authButton}>
                 <FiLogOut className={styles.authIcon} />
@@ -154,6 +144,18 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
               </Link>
             )}
           </div>
+
+          {isAuthenticated && (
+            <div className={styles.userInfo}>
+              <div className={styles.userAvatar}>
+                <FiUser className={styles.userIcon} />
+              </div>
+              <div className={styles.userDetails}>
+                <span className={styles.userName}>{firstName} {lastName}</span>
+                <span className={styles.userEmail}>{email}</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </aside>

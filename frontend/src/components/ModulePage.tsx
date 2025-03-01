@@ -10,6 +10,9 @@ interface ModulePageProps {
 
 const ModulePage = ({ onLogout }: ModulePageProps) => {
   const { moduleId } = useParams<{ moduleId: string }>()
+  
+  // Get the user's role from localStorage
+  const userRole = JSON.parse(localStorage.getItem("lms-user") || "{}").role
 
   // Find the course that contains this module
   const course = courseData.find((course) => course.id === moduleId)
@@ -23,7 +26,7 @@ const ModulePage = ({ onLogout }: ModulePageProps) => {
         <Header isAuthenticated onLogout={onLogout} />
         <div className="container page-container">
           <h1>Module not found</h1>
-          <Link to="/dashboard">Return to Dashboard</Link>
+          <Link to={userRole ? `/${userRole}-dashboard` : "/"}>Return to Dashboard</Link>
         </div>
       </div>
     )
@@ -35,7 +38,7 @@ const ModulePage = ({ onLogout }: ModulePageProps) => {
       <div className="container page-container">
         <div className={styles.moduleHeader}>
           <div className={styles.breadcrumbs}>
-            <Link to="/dashboard">Dashboard</Link> / <Link to="/courses">Courses</Link> / <span>{course.title}</span>
+            <Link to={userRole ? `/${userRole}-dashboard` : "/"}>Dashboard</Link> / <Link to="/courses">Courses</Link> / <span>{course.title}</span>
           </div>
           <h1>{course.title}</h1>
           <p>Instructor: {course.instructor}</p>
@@ -126,4 +129,3 @@ const ModulePage = ({ onLogout }: ModulePageProps) => {
 }
 
 export default ModulePage
-

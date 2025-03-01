@@ -1,0 +1,126 @@
+.gradesHeader {
+  margin-bottom: 2rem;
+}
+
+.gradesHeader h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.gradesHeader p {
+  color: var(--text-secondary);
+}
+
+.gradeSummary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summaryCard {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+
+.summaryCard h3 {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.summaryValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.courseGrades {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.courseGradeCard {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.courseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: var(--bg-hover);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.courseGrade {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.percentage {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: 700;
+}
+
+.assignmentList {
+  padding: 1.5rem;
+}
+
+.assignmentHeader {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.assignmentItem {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.assignmentItem:last-child {
+  border-bottom: none;
+}
+
+.assignmentName {
+  font-weight: 500;
+}
+
+.assignmentScore {
+  text-align: right;
+}
+
+.assignmentWeight {
+  text-align: right;
+  color: var(--text-secondary);
+}
+

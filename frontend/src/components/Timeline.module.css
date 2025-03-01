@@ -1,0 +1,138 @@
+.timelineHeader {
+  margin-bottom: 2rem;
+}
+
+.timelineHeader h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.timelineHeader p {
+  color: var(--text-secondary);
+}
+
+.filterContainer {
+  margin-bottom: 2rem;
+}
+
+.filterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterButton {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterButton:hover {
+  background-color: var(--bg-hover);
+}
+
+.filterButton.active {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.timelineContainer {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.timelineDate {
+  min-width: 120px;
+}
+
+.dateInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.dateDay {
+  font-weight: 500;
+}
+
+.daysUntil {
+  font-size: 0.9rem;
+  color: var(--accent-color);
+}
+
+.timelineContent {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+}
+
+.eventIcon {
+  font-size: 1.5rem;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-hover);
+  border-radius: 8px;
+}
+
+.eventDetails {
+  flex: 1;
+}
+
+.eventDetails h3 {
+  margin-bottom: 0.25rem;
+}
+
+.eventCourse {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--bg-hover);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.eventDescription {
+  color: var(--text-secondary);
+}
+
+.noEvents {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .timelineItem {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timelineDate {
+    min-width: auto;
+  }
+}
+

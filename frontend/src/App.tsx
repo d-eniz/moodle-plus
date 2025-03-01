@@ -1,11 +1,11 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import { ThemeProvider } from "./contexts/ThemeContext"
 import MainPage from "./components/MainPage"
 import Login from "./components/Login"
-import Dashboard from "./components/Dashboard"
+import Register from "./components/Register"  // Import the Register component
+import Dashboard from "./components/student-dashboard"
+import TeacherDashboard from "./components/teacher-dashboard" // Import the TeacherDashboard component
 import ModulePage from "./components/ModulePage"
 import Grades from "./components/Grades"
 import Timeline from "./components/Timeline"
@@ -14,20 +14,25 @@ import "./App.css"
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [userRole, setUserRole] = useState<string | null | undefined>(undefined) // Allow for undefined role
 
   // Check if user is already logged in
   useEffect(() => {
     const user = localStorage.getItem("lms-user")
     if (user) {
+      const parsedUser = JSON.parse(user)
       setIsAuthenticated(true)
+      setUserRole(parsedUser.role)  // Set the user's role from localStorage
     }
   }, [])
 
   const handleLogin = (credentials: { email: string; password: string }) => {
     // In a real app, you would validate credentials against a backend
     if (credentials.email && credentials.password) {
-      localStorage.setItem("lms-user", JSON.stringify({ email: credentials.email }))
+      const user = { email: credentials.email, role: "student" } // Example, adjust as needed
+      localStorage.setItem("lms-user", JSON.stringify(user))
       setIsAuthenticated(true)
+      setUserRole(user.role)  // Store the role
       return true
     }
     return false
@@ -36,23 +41,56 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem("lms-user")
     setIsAuthenticated(false)
+    setUserRole(undefined)  // Clear the role
+  }
+
+  const handleRegister = (user: { email: string; password: string; role: string }) => {
+    // In a real app, you would save the user data to a backend
+    if (user.email && user.password && user.role) {
+      localStorage.setItem("lms-user", JSON.stringify(user))
+      setIsAuthenticated(true)
+      setUserRole(user.role)  // Set the role after registration
+      return true
+    }
+    return false
   }
 
   return (
     <ThemeProvider>
       <Router>
         <Routes>
-          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <MainPage />} />
+          <Route path="/" element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <MainPage />} />
           <Route
             path="/login"
-            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />}
+            element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <Login onLogin={handleLogin} />}
           />
           <Route
-            path="/dashboard"
+            path="/register"
+            element={isAuthenticated && userRole !== undefined ? <Navigate to={`/${userRole}-dashboard`} /> : <Register onRegister={handleRegister} />}
+          />
+          {/* Redirect based on user role or to main page if undefined */}
+          <Route
+            path="/student-dashboard"
             element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Dashboard onLogout={handleLogout} />
-              </ProtectedRoute>
+              userRole === "student" ? (
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Dashboard onLogout={handleLogout} />
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
+          <Route
+            path="/teacher-dashboard"
+            element={
+              userRole === "teacher" ? (
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <TeacherDashboard onLogout={handleLogout} />
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/" />
+              )
             }
           />
           <Route
@@ -86,4 +124,3 @@ function App() {
 }
 
 export default App
-

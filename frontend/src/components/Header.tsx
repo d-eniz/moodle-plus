@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useContext } from "react"
-import { Link, NavLink, useNavigate } from "react-router-dom"
-import { ThemeContext } from "../contexts/ThemeContext"
-import styles from "./Header.module.css"
+import { useContext } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { ThemeContext } from "../contexts/ThemeContext";
+import styles from "./Header.module.css";
 import {
   FiHome,
   FiInfo,
@@ -11,43 +11,41 @@ import {
   FiGrid,
   FiCalendar,
   FiTrendingUp,
+  FiBookOpen,
+  FiMessageSquare,
   FiSun,
   FiMoon,
   FiLogIn,
   FiLogOut,
   FiUser
-} from "react-icons/fi"
+} from "react-icons/fi";
 
 interface HeaderProps {
-  onLogout?: () => void
-  isAuthenticated?: boolean
+  onLogout?: () => void;
+  isAuthenticated?: boolean;
 }
 
 const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
-  const { theme, toggleTheme } = useContext(ThemeContext)
-  const navigate = useNavigate()
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
-  const userData = JSON.parse(localStorage.getItem("lms-user") || "{}")
-  const userRole = userData?.role || "student"
-  const { firstName = "John", lastName = "Doe", email = "user@example.com" } = userData
+  const userData = JSON.parse(localStorage.getItem("lms-user") || "{}");
+  const userRole = userData?.role || "student";
+  const { firstName = "John", lastName = "Doe", email = "user@example.com" } = userData;
 
   const handleLogout = () => {
     if (onLogout) {
-      onLogout()
-      navigate("/")
+      onLogout();
+      navigate("/");
     }
-  }
+  };
 
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarContent}>
         <div className={styles.logoContainer}>
           <Link to="/">
-            <img
-              src="/moodleplus.png"
-              alt="Moodle+"
-              className={styles.logo}
-            />
+            <img src="/moodleplus.png" alt="Moodle+" className={styles.logo} />
           </Link>
         </div>
 
@@ -81,6 +79,24 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
               >
                 <FiTrendingUp className={styles.navIcon} />
                 Grades
+              </NavLink>
+              <NavLink
+                to="/courses"
+                className={({ isActive }) =>
+                  `${styles.navItem} ${isActive ? styles.active : ""}`
+                }
+              >
+                <FiBookOpen className={styles.navIcon} />
+                Courses
+              </NavLink>
+              <NavLink
+                to="/forum"
+                className={({ isActive }) =>
+                  `${styles.navItem} ${isActive ? styles.active : ""}`
+                }
+              >
+                <FiMessageSquare className={styles.navIcon} />
+                Forum
               </NavLink>
             </>
           ) : (
@@ -159,7 +175,7 @@ const Header = ({ onLogout, isAuthenticated = false }: HeaderProps) => {
         </div>
       </div>
     </aside>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

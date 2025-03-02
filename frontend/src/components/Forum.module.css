@@ -1,0 +1,132 @@
+/* Forum Page Header */
+.forumHeader {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color); /* Grey outline under header */
+  padding-bottom: 0.5rem;
+}
+
+.forumHeader h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.forumHeader p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+}
+
+/* Forum Layout */
+.forumLayout {
+  display: grid;
+  grid-template-columns: 250px auto;
+  gap: 1.5rem;
+}
+
+/* Sidebar for Modules (Outer Box: White, Inner Box: Grey) */
+.modulesSidebar {
+  background-color: var(--bg-white); /* Outer box: White */
+  padding: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color); /* Grey outline */
+}
+
+.modulesSidebar h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.moduleButton {
+  display: block;
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--border-color); /* Grey outline */
+  background-color: var(--bg-secondary); /* Inner box: Grey */
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.moduleButton:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--text-secondary);
+}
+
+.moduleButton.active {
+  background-color: var(--bg-hover);
+  border-color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* Discussions Container (Outer Box: White, Inner Box: Grey) */
+.discussionsContainer {
+  background-color: var(--bg-white); /* Outer box: White */
+  padding: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color); /* Grey outline */
+}
+
+.moduleTitle {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+/* Individual Discussion Card (Outer Box: White, Inner Box: Grey) */
+.discussionCard {
+  background-color: var(--bg-secondary); /* Inner box: Grey */
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color); /* Grey outline */
+  margin-bottom: 1rem;
+  transition: background 0.2s ease-in-out;
+}
+
+.discussionCard:hover {
+  background-color: var(--bg-hover);
+}
+
+.discussionCard h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.discussionMeta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+/* View Discussion Button */
+.viewDiscussion {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.viewDiscussion:hover {
+  background-color: var(--bg-primary);
+  border-color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .forumLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .modulesSidebar {
+    width: 100%;
+    padding: 1rem;
+  }
+}

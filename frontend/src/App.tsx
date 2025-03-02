@@ -10,6 +10,8 @@ import TeacherDashboard from "./components/teacher-dashboard";
 import ModulePage from "./components/ModulePage";
 import Grades from "./components/Grades";
 import Timeline from "./components/Timeline";
+import Courses from "./components/Courses";
+import Forum from "./components/Forum";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
@@ -127,6 +129,22 @@ function App() {
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
                   <Timeline onLogout={handleLogout} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/courses"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Courses onLogout={handleLogout} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/forum"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Forum onLogout={handleLogout} />
                 </ProtectedRoute>
               }
             />

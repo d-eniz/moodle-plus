@@ -1,0 +1,106 @@
+/* Courses Page Header */
+.coursesHeader {
+  text-align: left; /* Align to match Grades page */
+  margin-bottom: 2rem;
+}
+
+.coursesHeader h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.coursesHeader p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+/* Underline for header */
+.headerUnderline {
+  width: 100%;
+  height: 0.5px;
+  background-color: #666;
+  margin-top: 0.5rem;
+}
+
+/* Grid Layout */
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Course Cards */
+.courseCard {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.courseCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Course Icons */
+.courseIconContainer {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+/* Course Details */
+.courseTitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.courseInstructor {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Progress Bar */
+.progressBarContainer {
+  width: 100%;
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease-in-out;
+}
+
+.progressText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Continue Learning Button */
+.continueButton {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background-color: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.continueButton:hover {
+  background-color: var(--accent-hover);
+}

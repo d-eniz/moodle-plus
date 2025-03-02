@@ -2,11 +2,18 @@ import { Link } from "react-router-dom"
 import Header from "./Header"
 import styles from "./Dashboard.module.css"
 import { courseData } from "../data/courseData"
+import { FiBook, FiCode, FiDatabase, FiCloud, FiUser } from "react-icons/fi"
 
 interface DashboardProps {
   onLogout: () => void
 }
 
+const getCourseIcon = (courseTitle: string) => {
+  if (courseTitle.includes("Programming")) return <FiCode className={styles.courseIcon} />
+  if (courseTitle.includes("Data Structures")) return <FiDatabase className={styles.courseIcon} />
+  if (courseTitle.includes("Web Development")) return <FiCloud className={styles.courseIcon} />
+  return <FiBook className={styles.courseIcon} />
+}
 const TeacherDashboard = ({ onLogout }: DashboardProps) => {
   return (
     <div>
@@ -48,17 +55,16 @@ const TeacherDashboard = ({ onLogout }: DashboardProps) => {
             {courseData.map((course) => (
               <div key={course.id} className={styles.courseCard}>
                 <div className={styles.courseImage}>
-                  <img src={course.image || "/placeholder.svg"} alt={course.title} />
+                  {getCourseIcon(course.title)}
                 </div>
                 <div className={styles.courseContent}>
                   <h3>{course.title}</h3>
-                  <p className={styles.instructor}>Instructor: {course.instructor}</p>
                   <div className={styles.progressBar}>
                     <div className={styles.progressFill} style={{ width: `${course.progress}%` }}></div>
                   </div>
                   <p className={styles.progressText}>{course.progress}% Complete</p>
                   <Link to={`/modules/${course.id}`} className={styles.continueButton}>
-                    Manage Course
+                    Continue Learning
                   </Link>
                 </div>
               </div>

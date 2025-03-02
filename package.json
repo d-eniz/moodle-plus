@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "github-pages": "^3.0.2"
+  },
+  "scripts": {
+    "deploy": "cd frontend && npm run deploy"
+  }
+}

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import Header from "./Header"
 import styles from "./Dashboard.module.css"
 import { courseData } from "../data/courseData"
-import { FiBook, FiCode, FiDatabase, FiCloud, FiUser } from "react-icons/fi"
+import { FiBook, FiCode, FiDatabase, FiCloud } from "react-icons/fi"
 
 interface DashboardProps {
   onLogout: () => void
